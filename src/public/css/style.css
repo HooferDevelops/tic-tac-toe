@@ -37,28 +37,34 @@ body {
 
 @keyframes movement {
     0% {
+        -webkit-mask-position: 0 0;
         mask-position: 0 0;
     }
 
     100% {
+        -webkit-mask-position: 100vw 100vh;
         mask-position: 100vw 100vh;
     }
 }
 
 @keyframes background-image-trans {
     0% {
+        -webkit-mask-image: url("/assets/xo-1.svg");
         mask-image: url("/assets/xo-1.svg");
     }
 
     33% {
+        -webkit-mask-image: url("/assets/xo-2.svg");
         mask-image: url("/assets/xo-2.svg");
     }
 
     66% {
+        -webkit-mask-image: url("/assets/xo-3.svg");
         mask-image: url("/assets/xo-3.svg");
     }
 
     100% {
+        -webkit-mask-image: url("/assets/xo-1.svg");
         mask-image: url("/assets/xo-1.svg");
     }
 }
@@ -68,8 +74,8 @@ body {
     position: absolute;
     
     background-color: rgb(238, 238, 238);
-
-    mask-image: url("/assets/xo-3.svg");
+    
+    -webkit-mask-size: 100px;
     mask-size: 100px;
     
     width: 100vw;
