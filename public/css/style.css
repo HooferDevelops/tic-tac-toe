@@ -1,0 +1,86 @@
+html {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    background-color: rgb(248, 248, 248);
+
+    font-family: Arial;
+    margin: 0px;
+    padding: 0px;
+
+    width: 100%;
+    height: 100%;
+}
+
+.main-menu {
+    width: 100%;
+    height: 100%;
+}
+
+.error-menu {
+    width: 100%;
+    height: 100%
+}
+
+.center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-wrap: wrap;
+
+    width: 100%;
+    height: 100%;
+}
+
+@keyframes movement {
+    0% {
+        mask-position: 0 0;
+    }
+
+    100% {
+        mask-position: 100vw 100vh;
+    }
+}
+
+@keyframes background-image-trans {
+    0% {
+        mask-image: url("/assets/xo-1.svg");
+    }
+
+    33% {
+        mask-image: url("/assets/xo-2.svg");
+    }
+
+    66% {
+        mask-image: url("/assets/xo-3.svg");
+    }
+
+    100% {
+        mask-image: url("/assets/xo-1.svg");
+    }
+}
+
+.background {
+    z-index: -1;
+    position: absolute;
+    
+    background-color: rgb(238, 238, 238);
+
+    mask-image: url("/assets/xo-3.svg");
+    mask-size: 100px;
+    
+    width: 100vw;
+    height: 100vh;
+
+    animation: movement 100s linear infinite, background-image-trans 1s linear infinite;
+}
+
+.logo {
+    stroke: rgb(68, 120, 233);
+
+    width: 550px;
+    height: 125px;
+}
