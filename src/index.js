@@ -20,12 +20,12 @@ let globals = {
 }
 
 // * Public Access * //
-app.use(express.static('public'))
+app.use(express.static(__dirname + '/public'))
 
-fs.readdirSync("./api").forEach(file => {
+fs.readdirSync(__dirname + "/api").forEach(file => {
   if (!file.includes(".js")) return;
 
-  let func = require("./api/" + file);
+  let func = require(__dirname + "/api/" + file);
 
   try { func(globals, app) } catch { }
 });
@@ -42,10 +42,10 @@ io.on('connection', (socket) => {
     console.log(reason)
   })
   
-  fs.readdirSync("./socket").forEach(file => {
+  fs.readdirSync(__dirname + "/socket").forEach(file => {
     if (!file.includes(".js")) return;
     
-    let func = require("./socket/" + file);
+    let func = require(__dirname + "/socket/" + file);
 
     try { func(globals, io, socket) } catch {}
   });

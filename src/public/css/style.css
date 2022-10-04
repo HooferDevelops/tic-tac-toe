@@ -29,6 +29,7 @@ body {
     align-items: center;
     justify-content: center;
 
+    flex-direction: column;
     flex-wrap: wrap;
 
     width: 100%;
@@ -81,7 +82,7 @@ body {
     width: 100vw;
     height: 100vh;
 
-    animation: movement 100s linear infinite, background-image-trans 1s linear infinite;
+    animation: movement 100s linear infinite;
 }
 
 .logo {
@@ -89,4 +90,15 @@ body {
 
     width: 550px;
     height: 125px;
+}
+
+.line-container {
+}
+
+.line-button {
+    position: absolute;
+}
+
+.line-element {
+
 }
