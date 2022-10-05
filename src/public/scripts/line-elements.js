@@ -1,4 +1,49 @@
 let lineElements = {
+    // * Play Icon * //
+    createPlayIcon: (width, height) => {
+        let container = document.createElement("div");
+        container.className = "line-container play-icon";
+        container.style.width = `${width}px`;
+        container.style.height = `${height}px`;
+
+        let svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+        svg.setAttribute("viewBox", `0 0 ${width+5} ${height+5}`);
+        svg.style.width = `${width}px`;
+        svg.style.height = `${height}px`;
+        svg.className = "line-svg";
+
+        const rc = rough.svg(svg);
+
+        let path
+
+        function refresh() {
+            if (path) {
+                svg.removeChild(path);
+            }
+
+            path = rc.path("M2.87902 47C2.87902 45.5659 2.291 44.2333 2.09514 42.8227C1.95414 41.8072 1.99018 40.6065 2.07253 39.5897C2.24575 37.451 2.6858 35.3426 2.73581 33.1927C2.78354 31.1413 2.67382 28.9072 3.18051 26.8992C4.15391 23.0415 3.69305 18.8353 3.69305 14.8704C3.69305 13.255 3.69305 11.6397 3.69305 10.0244C3.69305 9.2018 3.69305 8.3792 3.69305 7.5566C3.69305 6.79802 4.00566 6.12891 4.08499 5.38521C4.13884 4.88049 4.10007 4.35582 4.10007 3.84801C4.10007 3.33155 3.76509 1.83799 4.59753 2.01439C7.12527 2.55004 9.72703 3.98443 11.9464 5.17841C13.8166 6.18451 15.5924 7.29722 17.5015 8.25971C19.1021 9.0667 20.7527 9.93103 22.3178 10.8171C23.8405 11.6792 25.5016 12.2805 27.1116 12.9816C28.253 13.4787 29.4405 13.8629 30.5863 14.3534C31.7811 14.8649 32.8554 15.5676 34.0534 16.0767C35.7276 16.7881 37.3581 17.6363 38.9527 18.4894C40.0181 19.0593 41.2254 19.5681 42.2239 20.2265C42.8392 20.6321 43.4289 21.0915 44.0103 21.5362C44.2093 21.6884 44.8194 22.0172 44.9373 22.26C45.2191 22.8397 46.1103 23.298 46.7689 23.4318C47.2884 23.5374 46.7933 24.4143 46.6257 24.5968C46.1937 25.0672 45.4929 25.3715 44.9373 25.7135C41.6472 27.7388 37.6778 28.7877 34.1137 30.3182C32.7017 30.9246 31.2429 31.4595 29.9079 32.207C29.1347 32.64 28.5654 33.3449 27.8427 33.8476C26.3524 34.8842 24.6941 35.6186 23.1545 36.5773C22.4661 37.006 21.7185 37.6242 20.9234 37.8319C20.6417 37.9055 20.3174 38.2096 20.0491 38.3282C19.475 38.5821 18.7544 38.7845 18.2703 39.183C17.5595 39.7681 16.4602 40.0488 15.602 40.3962C14.3168 40.9167 12.8901 41.26 11.5696 41.7128C8.54324 42.7507 5.69285 44.3745 3.01469 46.0074", 
+            {
+                fill: "rgb(140, 169, 231)",
+                fillStyle: "solid",
+                fillWeight: 5,
+                stroke: "rgb(68, 120, 233)",
+                strokeWidth: 5,
+                roughness: 1
+            });
+
+            svg.appendChild(path);
+        }
+
+        container.appendChild(svg);
+
+        refresh();
+
+        return {
+            container: container,
+            svg: svg,
+            refresh: refresh
+        }
+    },
     // * Logo * //
     createLogo: (width, height) => {
         let logoPaths = [
@@ -26,30 +71,41 @@ let lineElements = {
         container.style.height = `${height}px`;
 
         let svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+        svg.setAttribute("viewBox", `0 0 ${width+20} ${height+20}`);
         svg.style.width = `${width}px`;
         svg.style.height = `${height}px`;
         svg.className = "line-element";
 
         const rc = rough.svg(svg);
 
-        for (let i = 0; i < logoPaths.length; i++) {
-            let path = rc.path(logoPaths[i], {
-                fill: "none",
-                stroke: "black",
-                strokeWidth: 5,
-                roughness: 1
-            });
-            svg.appendChild(path);
+        function refresh() {
+            while (svg.firstChild) {
+                svg.removeChild(svg.firstChild);
+            }
+
+            for (let i = 0; i < logoPaths.length; i++) {
+                let path = rc.path(logoPaths[i], {
+                    fill: "none",
+                    stroke: "rgb(68, 120, 233)",
+                    strokeWidth: 5,
+                    roughness: 1
+                });
+                svg.appendChild(path);
+            }
         }
 
         container.appendChild(svg);
 
+        refresh();
+
         return {
             container: container,
-            svg: svg
+            svg: svg,
+            refresh: refresh
         };
     },
-    // * Line Element * //
+
+    // * Button Element * //
     createButton: (width, height) => {
         let container = document.createElement("div");
         container.className = "line-container";
@@ -92,18 +148,74 @@ let lineElements = {
                 svg.appendChild(node);
             }
         };
+    },
+
+    createInput: (width, height) => {
+        let container = document.createElement("div");
+        container.className = "line-container";
+        container.style.width = `${width}px`;
+        container.style.height = `${height}px`;
+
+        let svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+        svg.setAttribute("viewBox", `0 0 ${width} ${height}`);
+        svg.style.width = `${width}px`;
+        svg.style.height = `${height}px`;
+        svg.className = "line-element";
+
+        const rc = rough.svg(svg);
+        let node = rc.rectangle(10, 10, width-20, height-20, {bowing: 3, strokeWidth: 3, stroke: "rgb(68, 120, 233)"});
+        svg.appendChild(node);
+
+        let input = document.createElement("input");
+        input.className = "line-input";
+        input.style.width = `${width-25}px`;
+        input.style.height = `${height-25}px`;
+        input.style.border = "none";
+        input.style.outline = "none";
+        input.style.background = "none";
+        input.style.cursor = "pointer";
+
+        container.appendChild(input);
+
+        container.appendChild(svg);
+
+        return {
+            container: container,
+            svg: svg,
+            input: input,
+            refresh: () => {
+                if (node) {
+                    svg.removeChild(node);
+                }
+
+                node = rc.rectangle(10, 10, width-20, height-20, {bowing: 3, strokeWidth: 3, stroke: "rgb(68, 120, 233)"});
+                svg.appendChild(node);
+            }
+        };
     }
 }
 
 window.onload = () => {
     console.log("Loaded");
-    let buttonData = lineElements.createButton(300, 100);
-    document.getElementById("main-entry").appendChild(buttonData.container);
+
+    let inputData = lineElements.createInput(250, 75);
+    document.getElementById("lobby-join").appendChild(inputData.container);
+    inputData.input.type = "number";
+    inputData.input.placeholder = "Lobby Code";
+
+    let buttonData = lineElements.createButton(75, 75);
+    document.getElementById("lobby-join").appendChild(buttonData.container);
+
+    let playIconData = lineElements.createPlayIcon(45, 45);
+    buttonData.container.appendChild(playIconData.container);
+
+    let logoData = lineElements.createLogo(550, 125);
+    document.getElementById("main-entry").prepend(logoData.container);
 
     setInterval(() => {
+        inputData.refresh();
         buttonData.refresh();
+        playIconData.refresh();
+        logoData.refresh();
     }, 400);
-
-    let logo = lineElements.createLogo();
-    document.getElementById("main-entry").appendChild(logo.container);
 }

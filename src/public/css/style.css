@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');
+
 html {
     width: 100%;
     height: 100%;
@@ -93,12 +95,54 @@ body {
 }
 
 .line-container {
+    position: relative;
 }
 
-.line-button {
+.line-button, .line-input {
+    display: block;
     position: absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+    color:rgb(68, 120, 233);
+    font-size: 30px;
+    line-height: 25%;
+    text-align: center;
+}
+
+.play-icon {
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+
+.line-input {
+    font-family: 'Patrick Hand', cursive;
+}
+
+.line-input::placeholder {
+    color: rgb(140, 169, 231);
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0; 
 }
 
 .line-element {
 
+}
+
+.join-input {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-direction: row;
+    flex-wrap: wrap;
 }
